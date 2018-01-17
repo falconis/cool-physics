@@ -1,12 +1,10 @@
 var canvas = document.getElementById('canvas');
 var ctx = canvas.getContext('2d');
 
-canvas.width = window.innerWidth
-canvas.height = 0.25 * window.innerHeight
-var x = 175;
+var x = canvas.width/2 - 175;
 var y = 0;
 var w = 0.0;
-var a = 0.0;
+var a=0.0;
 var alp=0.0;
 var v = 0.0;
 var side = 75;
@@ -32,10 +30,8 @@ ctx.scale(-1, 1); // flip
 ctx.rotate(-Math.PI);
 
 // extra decos
-function drawbase(){
-    ctx.fillStyle = '#1ea51c';
-    ctx.fillRect(0, 0, canvas.width, 4 * mu + 1);
-}
+ctx.fillStyle = 'green';
+ctx.fillRect(0, 0, canvas.width, 2);
 
 // box
 var box = {
@@ -54,8 +50,8 @@ var box = {
         ctx.lineTo(this.x3,this.y3);
         ctx.lineTo(this.x4,this.y4);
         ctx.closePath();
-        var colorDensity = 40 * kg;
-        ctx.fillStyle = 'rgb(' + (200 - colorDensity) + ', ' + (200 - colorDensity) + ',' + ' 200)';
+        ctx.fillStyle = this.color;
+        console.log(this.x4);
         ctx.fill();
     },
     // to fix offset produced by radians going off limit
@@ -67,24 +63,8 @@ var box = {
         ctx.lineTo(this.x4+side,this.y4);
         ctx.lineTo(this.x4,this.y4);
         ctx.closePath();
-        ctx.fillStyle = "#1ea51c";
+        ctx.fillStyle = "green";
         ctx.fill();
-        drawbase();
-    },
-    //Arrow
-    drawarrow: function() {
-        ctx.beginPath()
-        ctx.moveTo(x-side-6*f, y_applied);
-        ctx.lineTo(x-side, y_applied);
-        ctx.lineTo(x-side-5, y_applied);
-        ctx.lineTo(x-side-5, y_applied-5);
-        ctx.lineTo(x-side, y_applied);
-        ctx.lineWidth = 2.8;
-        ctx.strokeStyle = '#c12222';
-        ctx.stroke();
-        ctx.fillStyle = '#c12222';
-        ctx.fill();
-        ctx.closePath()
     },
     topple: function(){
         this.r1 += this.om; 
@@ -105,11 +85,18 @@ var box = {
         this.x3 += this.vel;
         this.x4 += this.vel;
     },
-
     update: function(){
         this.draw();
         this.om = w;
         this.vel = v;
+        //extra dot
+        ctx.beginPath()
+        ctx.arc(x-side, y_applied, 3, 0, Math.PI * 2, false);
+        ctx.strokeStyle = 'black';
+        ctx.stroke();
+        ctx.fillStyle = '#f44242';
+        ctx.fill();
+        ctx.closePath()
     }
 }
 
@@ -122,9 +109,6 @@ function animate() {
     clear();
     requestAnimationFrame(animate);
     box.update();
-    box.drawarrow();
-    drawbase();
-    //Topples and slips
     if((f > mu * kg * g) && (f * y_applied > (kg * g * side)/2 ))
     {
         if(box.y3 < 0)
@@ -248,7 +232,7 @@ function reset()
     v = 0;
     a = 0;
     t_total = 0;
-    x =175;
+    x = canvas.width/2 - 175;
     box.x1 = x-side; box.y1 = y; box.r1 = Math.PI;
     box.x2 = x-side; box.y2 = y + side; box.r2 = Math.PI*0.75;
     box.x3 = x; box.y3 = y + side; box.r3 = Math.PI*0.5;
@@ -266,7 +250,7 @@ document.getElementById("reset_btn").onclick = function() {
     update_g(10);
     update_y(37.5);
     update_kg(1);
- 
+
 }
 
 // very bad practice due to materialize framework

@@ -9,14 +9,11 @@
 
   <style>
     body{
-      margin: 0;
-      padding: 0;
       min-width: 1150px;
     }
-    /* canvas {
-      margin: 0;
-      padding: 0;
-    } */
+    canvas {
+      margin: 20px;
+    }
     p{
       font-family: Roboto;
       text-align: left;
@@ -39,31 +36,31 @@
       font-family: Roboto;
     }
     .mdl-list{
-      padding: 10px;  
-    }
-    h3{
-      text-align: center;
+      margin-left:200px;
     }
   </style>
 
 </head>
 
 <body>
-  <div class="mdl-cell mdl-cell--12-col">
-      <h3 class="page-title">
-          Toppling.
-      </h3>
-    <canvas id="canvas"></canvas>
-  </div>
-</div>
+
 
 <div class="mdl-grid">
-  <div class="mdl-cell mdl-cell--4-col">
+  <div class="mdl-cell mdl-cell--6-col">
+    <h3 class="page-title">
+        Toppling.
+    </h3>
+    <canvas id="canvas" width="600" height="500"></canvas>
+  </div>
+  <div class="mdl-cell mdl-cell--6-col">
+
     <ul class="mdl-list">
-        <li class="mdl-list__item">
-            <button class="mdl-button mdl-js-button mdl-button--colored" id="replay_btn">Replay</button>
-            <button class="mdl-button mdl-js-button mdl-button--colored" id="reset_btn">Reset</button>
-          </li>      
+
+      <li class="mdl-list__item">
+        <button class="mdl-button mdl-js-button mdl-button--colored" id="replay_btn">Replay</button>
+        <button class="mdl-button mdl-js-button mdl-button--colored" id="reset_btn">Reset</button>
+      </li>
+      
       <!--alpha-->
       <li class="mdl-list__item--two-line">
         <span class="mdl-list__item-primary-content">
@@ -80,12 +77,9 @@
           <span class="property">a</span>
           <span class="property-value" id="a-display">0</span>
         </span>
-      </li> 
-    </ul>
-</div> 
-<div class="mdl-cell mdl-cell--4-col">
-    <ul class="mdl-list">
-    <!--omega-->
+      </li>
+
+      <!--omega-->
       <li class="mdl-list__item--two-line">
         <span class="mdl-list__item-primary-content">
           <span class="mdl-list__item-sub-title">Current angular velocity (rad/s) (positive is clockwise)</span>
@@ -102,6 +96,7 @@
             <span class="property-value" id="v-display">0</span>
           </span>
         </li>
+      
       <!--Force-->
       <li class="mdl-list__item--two-line">
           <span class="mdl-list__item-primary-content">
@@ -115,12 +110,11 @@
             </span>
           </span>
         </li>
-     
 
         <!-- y -->
         <li class="mdl-list__item--two-line">
             <span class="mdl-list__item-primary-content">
-              <span class="mdl-list__item-sub-title">Height from where force is applied</span>
+              <span class="mdl-list__item-sub-title">Distance from where force is applied</span>
               <span class="property">cm</span>
               <span class="property-value">
                 <input id="y-slider" type="range" class="mdl-slider mdl-js-slider" onchange="update_y(this.value)" min="0" max="75" value="37.5" step="0.05">
@@ -130,10 +124,6 @@
               </span>
             </span>
           </li>
-        </ul>
-      </div>
-<div class="mdl-cell mdl-cell--4-col">
-    <ul class="mdl-list">
       <!--mu-->
       <li class="mdl-list__item--two-line">
         <span class="mdl-list__item-primary-content">
@@ -147,6 +137,7 @@
           </span>
         </span>
       </li>
+
       <!--kg-->
       <li class="mdl-list__item--two-line">
         <span class="mdl-list__item-primary-content">
@@ -160,7 +151,7 @@
           </span>
         </span>
       </li>
-   
+
       <!--g-->
       <li class="mdl-list__item--two-line">
         <span class="mdl-list__item-primary-content">
@@ -174,16 +165,11 @@
           </span>
         </span>
       </li>
-      <li class="mdl-list__item--two-line">
-        <span class="mdl-list__item-primary-content">
-        <span class="mdl-list__item-sub-title">
-        Note: Here change in &omega; is &alpha;/1000 and change in v is a/10. <br>
-        All four conditions of toppling and slipping are considered. <br>
-        The animation speed is just for visualisation. <br>
-        When block come to rest the final values of &omega;, &alpha;, v and a are shown.
-      </span>
-      </span>
-    </li>
+    </ul>
+    <p>Note: Here change in &omega; is &alpha;/1000 and change in v is a/10. <br>
+       All four conditions of toppling and slipping are considered. <br>
+       The animation speed is just for visualisation. <br>
+       When block come to rest the final values of &omega;, &alpha;, v and a are shown.</p> 
   </div>
 </div>
 
